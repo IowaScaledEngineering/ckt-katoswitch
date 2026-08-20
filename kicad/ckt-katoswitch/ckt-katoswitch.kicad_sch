@@ -4197,6 +4197,12 @@
 		(uuid "cff75423-7b4e-4a60-aa4c-3bbd4d1ac3ab")
 	)
 	(junction
+		(at 171.45 133.35)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f1b206f1-7dc9-479a-aa17-fcf6c747d817")
+	)
+	(junction
 		(at 222.25 59.69)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4790,6 +4796,16 @@
 	)
 	(wire
 		(pts
+			(xy 171.45 148.59) (xy 171.45 147.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6dddc008-d2c4-4ca2-bbf5-937a34bdf3db")
+	)
+	(wire
+		(pts
 			(xy 68.58 120.65) (xy 68.58 123.19)
 		)
 		(stroke
@@ -5120,6 +5136,16 @@
 	)
 	(wire
 		(pts
+			(xy 171.45 157.48) (xy 171.45 156.21)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b737a628-3151-443f-bd4f-e49248912eb1")
+	)
+	(wire
+		(pts
 			(xy 210.82 55.88) (xy 208.28 55.88)
 		)
 		(stroke
@@ -5267,6 +5293,16 @@
 			(type default)
 		)
 		(uuid "c6e674bc-69a9-4299-a407-f76dda52c19a")
+	)
+	(wire
+		(pts
+			(xy 171.45 133.35) (xy 171.45 139.7)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ca24ad4d-c8f0-4594-8b89-0d33ebe7bb57")
 	)
 	(wire
 		(pts
@@ -6074,7 +6110,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "1k"
+		(property "Value" "10k"
 			(at 140.335 53.34 0)
 			(effects
 				(font
@@ -6606,6 +6642,140 @@
 			(project "ckt-katoswitch"
 				(path "/ee2a1513-8489-42c3-8daf-9d032b383b2d"
 					(reference "R4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R_US")
+		(at 171.45 143.51 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "43e3d915-c4b0-4295-a8e7-30ab90c85b36")
+		(property "Reference" "R6"
+			(at 166.878 142.494 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "1k"
+			(at 167.005 144.272 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric"
+			(at 172.466 143.764 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 171.45 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 171.45 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "48e80cab-a66a-4200-bf27-f7ca8575f70d")
+		)
+		(pin "2"
+			(uuid "0611aea6-bfbb-4acb-bf64-382ee5eff645")
+		)
+		(instances
+			(project "ckt-katoswitch"
+				(path "/ee2a1513-8489-42c3-8daf-9d032b383b2d"
+					(reference "R6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 171.45 157.48 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "449588b5-f290-447f-9287-e1fe678f28cf")
+		(property "Reference" "#PWR012"
+			(at 171.45 163.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 171.45 161.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" ""
+			(at 171.45 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 171.45 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 171.45 157.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "03bc9f17-b5b6-4630-a410-1994c6d7129e")
+		)
+		(instances
+			(project "ckt-katoswitch"
+				(path "/ee2a1513-8489-42c3-8daf-9d032b383b2d"
+					(reference "#PWR012")
 					(unit 1)
 				)
 			)
@@ -9417,6 +9587,74 @@
 			(project "ckt-katoswitch"
 				(path "/ee2a1513-8489-42c3-8daf-9d032b383b2d"
 					(reference "#PWR013")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:LED")
+		(at 171.45 152.4 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e602da4f-b691-4fb1-98f4-40247463a41a")
+		(property "Reference" "D9"
+			(at 172.72 149.86 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "AMBER"
+			(at 176.022 151.13 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "LED_SMD:LED_0805_2012Metric"
+			(at 171.45 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 171.45 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 171.45 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "c43ff008-ca11-4c3d-9e1b-0d6557c484d7")
+		)
+		(pin "2"
+			(uuid "5e14b997-3b06-41b8-8afb-56d967707c5f")
+		)
+		(instances
+			(project "ckt-katoswitch"
+				(path "/ee2a1513-8489-42c3-8daf-9d032b383b2d"
+					(reference "D9")
 					(unit 1)
 				)
 			)
