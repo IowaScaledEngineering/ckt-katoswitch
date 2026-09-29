@@ -27,7 +27,7 @@ LICENSE:
 #include <util/delay.h>
 #include <stdint.h>
 #include <stdbool.h>
-
+#include <avr/wdt.h>
 #include "debouncer.h"
 #include "eepromWearLevel.h"
 
@@ -213,6 +213,20 @@ bool operateCoilDriver(bool setNormal, bool setReverse, uint16_t currentMillis)
 
 
 
+bool isButtonTriggered(uint8_t options)
+{
+	if (options & OPTION_A_MASK)
+		return false;
+		
+	return true;
+}
+
+bool isLevelTriggered(uint8_t options)
+{
+	return !isButtonTriggered(options);
+}
+
+
 int main(void) 
 {
 	DebounceState8_t inputDebouncer;
@@ -220,6 +234,8 @@ int main(void)
 	uint8_t optionJumpers = 0;
 	uint8_t currentState = 0;
 	uint16_t millis = 1;
+
+	wdt_enable(WDTO_120MS);
 
 	init();
 
@@ -231,11 +247,14 @@ int main(void)
 	//  at runtime with the power on
 	optionJumpers = getOptionJumpers();
 
-	if (ewlRead(&stateSaveEEP, (const uint8_t*)&currentState, sizeof(uint8_t)))
-	{
 
+
+	if (isButtonTriggered(optionJumpers) && ewlRead(&stateSaveEEP, (const uint8_t*)&currentState, sizeof(uint8_t)))
+	{
 		// Only do this if we're in pushbutton mode
+		// Level-triggered doesn't need state-saving
 		// Set up current state based on state on power loss
+		
 		if (STATE_REVERSE == currentState)
 		{
 			operateCoilDriver(false, true, millis);
@@ -254,6 +273,8 @@ int main(void)
 			millis++;
 		}
 
+		wdt_reset();
+
 		bool isPointsMoving = operateCoilDriver(false, false, millis);
 
 		if (!isPointsMoving && (millis - lastInputRead > SWITCH_READ_TIME_MS))
@@ -267,7 +288,7 @@ int main(void)
 			// Mode 0 is toggle switch - A is level sensitive
 			// Mode 1 is pushbuttons - A is normal, B is reverse
 			uint8_t newState = 0;
-			if (1)
+			if (isButtonTriggered(optionJumpers))
 			{
 				buttonsPressed = buttonsPressed & changed;
 				if (buttonsPressed & SWITCH_A_MASK)
@@ -277,7 +298,7 @@ int main(void)
 					newState = STATE_REVERSE;
 				}
 			}
-			else if (0)
+			else if (isLevelTriggered(optionJumpers))
 			{
 				// Level sensitive mode
 				if (buttonsPressed & SWITCH_A_MASK)
@@ -286,12 +307,14 @@ int main(void)
 					newState = STATE_NORMAL;				
 			}
 
-			if (0 != newState)
+			if (0 != newState && newState != currentState)
 			{
 				bool setNormal = (newState == STATE_NORMAL);
 				bool setReverse = (newState == STATE_REVERSE);
 				currentState = newState;
-				ewlWrite(&stateSaveEEP, (const uint8_t*)&currentState, sizeof(uint8_t));
+				// State saving is only needed on button triggering, don't waste eep cycles if we don't need it
+				if (isButtonTriggered(optionJumpers))
+					ewlWrite(&stateSaveEEP, (const uint8_t*)&currentState, sizeof(uint8_t));
 				operateCoilDriver(setNormal, setReverse, millis);
 			}
 		}
